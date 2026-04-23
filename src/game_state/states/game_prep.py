@@ -1,11 +1,10 @@
 import random
 
-from game_state.game_status import GameStatus
+from consts.game_status import GameStatus
+from consts.team_names import TEAM_NAMES, TeamNames
 from game_state.states.state import State
 from utils.dict_loader import load_dictionary
 
-
-TEAM_NAMES = ['hawk', 'falcon']
 
 class GamePrep(State):
     def prepare(self):
@@ -22,12 +21,12 @@ class GamePrep(State):
     # expects tuple with team name, player name and command
     def pass_input(self, input):
         team, player, command = input
-        if team == 'hawk':
+        if team == TeamNames.HAWK:
             if command == 'add':
                 self.state.hawk_players.append(player)
             elif command == 'remove':
                 self.state.hawk_players.remove(player)
-        elif team == 'falcon':
+        elif team == TeamNames.FALCON:
             if command == 'add':
                 self.state.falcon_players.append(player)
             elif command == 'remove':

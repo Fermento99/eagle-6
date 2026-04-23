@@ -1,4 +1,4 @@
-from game_state.game_status import GameStatus
+from consts.game_status import GameStatus
 from game_state.states.state import State
 
 

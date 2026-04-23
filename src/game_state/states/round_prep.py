@@ -1,6 +1,7 @@
 import random
 
-from game_state.game_status import GameStatus
+from consts.game_status import GameStatus
+from consts.team_names import TeamNames
 from game_state.states.state import State
 
 
@@ -18,9 +19,9 @@ class RoundPrep(State):
 
     def validate_encryptor(self, encryptor):
         current_team = self.state.current_team
-        if current_team == "hawk":
+        if current_team == TeamNames.HAWK:
             return encryptor in self.state.hawk_players
-        if current_team == "falcon":
+        if current_team == TeamNames.FALCON:
             return encryptor in self.state.falcon_players
         return False
 

@@ -1,5 +1,5 @@
 from game_state.game_state_data import GameStateData
-from game_state.game_status import GameStatus
+from consts.game_status import GameStatus
 from game_state.states.game_prep import GamePrep
 
 from game_state.states.await_clues import AwaitClues

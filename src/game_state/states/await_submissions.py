@@ -1,4 +1,5 @@
-from game_state.game_status import GameStatus
+from consts.game_status import GameStatus
+from consts.team_names import TeamNames
 from game_state.states.state import State
 
 
@@ -9,7 +10,7 @@ class AwaitSubmissions(State):
     # expects tuple, team name and submission as a 3 element list with numbers 1 to 4
     def pass_input(self, input):
         team, submission = input
-        if team == "falcon":
+        if team == TeamNames.FALCON:
             self.state.falcon_submission = submission
-        if team == "hawk":
+        if team == TeamNames.HAWK:
             self.state.hawk_submission = submission

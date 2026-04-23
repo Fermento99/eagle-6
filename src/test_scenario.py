@@ -1,3 +1,4 @@
+from consts.team_names import TeamNames
 from game_state.game_state import GameState
 
 
@@ -18,12 +19,12 @@ ATTR = [
 ]
 
 def add_players(gs: GameState):
-    gs.pass_input(('falcon', 'Wers', 'add'))
-    gs.pass_input(('falcon', 'Asia', 'add'))
-    gs.pass_input(('falcon', 'Ola', 'add'))
-    gs.pass_input(('hawk', 'Milosz', 'add'))
-    gs.pass_input(('hawk', 'Patryk', 'add'))
-    gs.pass_input(('hawk', 'Mikolaj', 'add'))
+    gs.pass_input((TeamNames.FALCON, 'Wers', 'add'))
+    gs.pass_input((TeamNames.FALCON, 'Asia', 'add'))
+    gs.pass_input((TeamNames.FALCON, 'Ola', 'add'))
+    gs.pass_input((TeamNames.HAWK, 'Milosz', 'add'))
+    gs.pass_input((TeamNames.HAWK, 'Patryk', 'add'))
+    gs.pass_input((TeamNames.HAWK, 'Mikolaj', 'add'))
     return ['Wers', 'Asia', 'Ola'], ['Milosz', 'Mikolaj', 'Patryk']
 
 def display_gs(gs: GameState):
