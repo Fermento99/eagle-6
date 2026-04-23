@@ -19,6 +19,19 @@ class GameState:
     def __init__(self):
         self.state = GamePrep()
         self.ongoing = True
+        self.clues = None
+        self.code = None
+        self.encryptor = None
+        self.falcon_submission = None
+        self.hawk_submission = None
+        self.falcon_codenames = None
+        self.hawk_codenames = None
+        self.falcon_players = None
+        self.hawk_players = None
+        self.falcon_tokens = None
+        self.hawk_tokens = None
+        self.current_team = None
+        self.winner = None
     
     def prepare(self):
         self.state.prepare()

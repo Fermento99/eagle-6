@@ -1,15 +1,12 @@
 from game_state.game_state import GameState
+from test_scenario import test_scenario
 
 
-def test_proceed(gs: GameState):
-    for i in range(10):
-        gs.prepare()
-        gs.proceed()
 
 def main():
     print('hello')
     game_state = GameState()
-    test_proceed(game_state)
+    test_scenario(game_state)
 
 if __name__ == '__main__':
     main()
