@@ -18,16 +18,24 @@ STATE_MAP = {
 class GameState:
     def __init__(self):
         self.state = GamePrep()
+        self.ongoing = True
     
     def prepare(self):
         self.state.prepare()
 
     def proceed(self):
+        if not self.ongoing:
+            return 
+        
         next_state, values = self.state.proceed()
         if values is not None:
             for key in values:
                 self.__setattr__(key, values[key])
-        self.state = STATE_MAP[next_state](self)
+        if next_state != None:
+            self.state = STATE_MAP[next_state](self)
+        else:
+            self.ongoing = False
+            print('game ended')
 
     def pass_input(self, input):
         self.state.pass_input(input)

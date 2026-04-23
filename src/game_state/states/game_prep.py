@@ -17,6 +17,7 @@ class GamePrep(State):
         self.falcon_tokens = [0, 0]
         self.hawk_tokens = [0, 0]
         self.current_team = ''
+        self.winner = None
 
     def prepare(self):
         words = load_dictionary()
