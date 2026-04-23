@@ -27,7 +27,7 @@ class GameState:
         if values is not None:
             for key in values:
                 self.__setattr__(key, values[key])
-        self.state = STATE_MAP[next_state]()
+        self.state = STATE_MAP[next_state](self)
 
     def pass_input(self, input):
         self.state.pass_input(input)
