@@ -27,16 +27,15 @@ def add_players(gs: GameState):
     return ['Wers', 'Asia', 'Ola'], ['Milosz', 'Mikolaj', 'Patryk']
 
 def display_gs(gs: GameState):
-    for key in ATTR:
-        print(key, gs.__getattribute__(key))
+    print(gs.data)
 
 def test_scenario(gs: GameState):
     gs.prepare()
     teams = add_players(gs)
     gs.proceed()
-    while gs.ongoing:
+    while gs.is_ongoing():
         gs.prepare()
         display_gs(gs)
         gs.proceed()
-    print(gs.winner)
+    print("and the winner is", gs.data.winner)
     

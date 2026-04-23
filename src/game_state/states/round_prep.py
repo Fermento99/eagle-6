@@ -5,24 +5,16 @@ from game_state.states.state import State
 
 
 class RoundPrep(State):
-    def __init__(self, state):
-        super().__init__(state)
-        self.code = []
-        self.encryptor = ''
-
     def prepare(self):
-        self.code = create_code()
+        self.state.code = create_code()
 
     def proceed(self):
-        return GameStatus.AWAIT_CLUES, {
-            "code": self.code,
-            "encryptor": self.encryptor,
-        }
+        return GameStatus.AWAIT_CLUES
 
     # expects encryptor name
     def pass_input(self, input):
         if self.validate_encryptor(input):
-            self.encryptor = input
+            self.state.encryptor = input
 
     def validate_encryptor(self, encryptor):
         current_team = self.state.current_team

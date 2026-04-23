@@ -21,16 +21,15 @@ class WrapRound(State):
             if falcon_submission == code:
                 self.state.falcon_tokens[1] += 1
             self.state.current_team = 'falcon'
+        
 
 
     def proceed(self):
         if self.state.hawk_tokens[0] == 2 or self.state.falcon_tokens[1] == 2:
-            return None, {
-                "winner": 'falcon'
-            }
+            self.state.winner = 'falcon'
+            return None
         if self.state.falcon_tokens[0] == 2 or self.state.hawk_tokens[1] == 2:
-            return None, {
-                "winner": 'hawk'
-            }
+            self.state.winner = 'hawk'
+            return None
         
-        return GameStatus.ROUND_PREP, None
+        return GameStatus.ROUND_PREP

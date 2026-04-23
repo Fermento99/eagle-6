@@ -1,10 +1,11 @@
 from abc import abstractmethod
 
+from game_state.game_state_data import GameStateData
+
 
 
 class State:
-    def __init__(self, state):
-        super().__init__()
+    def __init__(self, state: GameStateData):
         self.state = state
 
     def prepare(self):

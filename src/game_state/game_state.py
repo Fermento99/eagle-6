@@ -1,3 +1,4 @@
+from game_state.game_state_data import GameStateData
 from game_state.game_status import GameStatus
 from game_state.states.game_prep import GamePrep
 
@@ -17,38 +18,23 @@ STATE_MAP = {
 
 class GameState:
     def __init__(self):
-        self.state = GamePrep()
-        self.ongoing = True
-        self.clues = None
-        self.code = None
-        self.encryptor = None
-        self.falcon_submission = None
-        self.hawk_submission = None
-        self.falcon_codenames = None
-        self.hawk_codenames = None
-        self.falcon_players = None
-        self.hawk_players = None
-        self.falcon_tokens = None
-        self.hawk_tokens = None
-        self.current_team = None
-        self.winner = None
+        self.data = GameStateData()
+        self.state = GamePrep(self.data)
     
     def prepare(self):
         self.state.prepare()
 
     def proceed(self):
-        if not self.ongoing:
+        if not self.is_ongoing():
             return 
         
-        next_state, values = self.state.proceed()
-        if values is not None:
-            for key in values:
-                self.__setattr__(key, values[key])
+        next_state = self.state.proceed()
+        
         if next_state != None:
-            self.state = STATE_MAP[next_state](self)
-        else:
-            self.ongoing = False
-            print('game ended')
+            self.state = STATE_MAP[next_state](self.data)
 
     def pass_input(self, input):
         self.state.pass_input(input)
+
+    def is_ongoing(self):
+        return self.data.winner == None
