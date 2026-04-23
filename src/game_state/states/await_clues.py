@@ -3,12 +3,16 @@ from game_state.states.state import State
 
 
 class AwaitClues(State):
-    def prepare(self):
-        print('await clues')
+    def __init__(self, state):
+        super().__init__(state)
+        self.clues = []
 
     def proceed(self):
-        return GameStatus.AWAIT_SUBMISSIONS, None
+        return GameStatus.AWAIT_SUBMISSIONS, {
+            "clues": self.clues
+        }
 
+    # expects a list of 3 clues
     def pass_input(self, input):
-        pass
+        self.clues = input
 
