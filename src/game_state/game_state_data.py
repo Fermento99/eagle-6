@@ -17,6 +17,7 @@ GAME_STATE_DATA_KEYS = [
 
 class GameStateData:
     def __init__(self):
+        self.round_number = 0
         self.winner = None
         self.current_team = None
         self.encryptor = None

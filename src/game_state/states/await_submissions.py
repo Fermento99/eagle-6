@@ -5,7 +5,11 @@ from game_state.states.state import State
 
 class AwaitSubmissions(State):
     def proceed(self):
-        return GameStatus.WRAP_ROUND
+        if self.validate():
+            return GameStatus.WRAP_ROUND
+    
+    def validate(self):
+        return self.state.hawk_submission != None and self.state.falcon_submission != None
 
     # expects tuple, team name and submission as a 3 element list with numbers 1 to 4
     def pass_input(self, input):
