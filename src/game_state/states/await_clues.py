@@ -7,7 +7,7 @@ class AwaitClues(State):
         print('await clues')
 
     def proceed(self):
-        return GameStatus.AWAIT_SUBMISSIONS
+        return GameStatus.AWAIT_SUBMISSIONS, None
 
     def pass_input(self, input):
         pass

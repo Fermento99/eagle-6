@@ -7,7 +7,7 @@ class WrapRound(State):
         print('wrap round')
 
     def proceed(self):
-        return GameStatus.ROUND_PREP
+        return GameStatus.ROUND_PREP, None
 
     def pass_input(self, input):
         pass

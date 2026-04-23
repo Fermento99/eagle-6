@@ -7,7 +7,7 @@ class RoundPrep(State):
         print('round Prep')
 
     def proceed(self):
-        return GameStatus.AWAIT_CLUES
+        return GameStatus.AWAIT_CLUES, None
 
     def pass_input(self, input):
         pass

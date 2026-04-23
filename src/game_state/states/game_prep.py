@@ -1,14 +1,46 @@
+import random
+
 from game_state.game_status import GameStatus
 from game_state.states.state import State
+from utils.dict_loader import load_dictionary
+
 
 
 class GamePrep(State):
+    def __init__(self):
+        self.falcon_codenames = []
+        self.hawk_codenames = []
+        self.falcon_players = []
+        self.hawk_players = []
+
     def prepare(self):
-        print('game prep')
+        words = load_dictionary()
+        selected_words = pick_random_words(words)
+        self.falcon_codenames = selected_words[:4]
+        self.hawk_codenames = selected_words[4:]
 
     def proceed(self):
-        return GameStatus.ROUND_PREP
+        return GameStatus.ROUND_PREP, {
+            "falcon_codenames": self.falcon_codenames,
+            "hawk_codenames": self.hawk_codenames,
+            # "falcon_players": self.falcon_players,
+            "hawk_players": self.hawk_players,
+        }
 
+    # expects tuple with team name, player name and command
     def pass_input(self, input):
-        pass
+        team, player, command = input
+        if team == 'hawk':
+            if command == 'add':
+                self.hawk_players.append(player)
+            elif command == 'remove':
+                self.hawk_players.remove(player)
+        elif team == 'falcon':
+            if command == 'add':
+                self.falcon_players.append(player)
+            elif command == 'remove':
+                self.falcon_players.remove(player)
+            
 
+def pick_random_words(dictionary: list[str]):
+    return random.sample(population=dictionary, k=8)

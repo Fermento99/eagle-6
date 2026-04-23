@@ -7,7 +7,7 @@ class AwaitSubmissions(State):
         print('await submissions')
 
     def proceed(self):
-        return GameStatus.WRAP_ROUND
+        return GameStatus.WRAP_ROUND, None
 
     def pass_input(self, input):
         pass
