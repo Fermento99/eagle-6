@@ -1,22 +1,8 @@
+import random
+
 from consts.team_names import TeamNames
 from game_state.game_state import GameState
 
-
-ATTR = [
-    "clues",
-    "code",
-    "encryptor",
-    "falcon_submission",
-    "hawk_submission",
-    "falcon_codenames",
-    "hawk_codenames",
-    "falcon_players",
-    "hawk_players",
-    "falcon_tokens",
-    "hawk_tokens",
-    "current_team",
-    "winner",
-]
 
 def add_players(gs: GameState):
     gs.pass_input((TeamNames.FALCON, 'Wers', 'add'))
@@ -25,7 +11,6 @@ def add_players(gs: GameState):
     gs.pass_input((TeamNames.HAWK, 'Milosz', 'add'))
     gs.pass_input((TeamNames.HAWK, 'Patryk', 'add'))
     gs.pass_input((TeamNames.HAWK, 'Mikolaj', 'add'))
-    return ['Wers', 'Asia', 'Ola'], ['Milosz', 'Mikolaj', 'Patryk']
 
 def submit_code(gs: GameState, team: TeamNames, isCorect: bool):
     gs.pass_input((team, gs.data.code if isCorect else [0, 0, 0]))
@@ -58,15 +43,26 @@ def game_loop(gs: GameState, miscomunication=False, interception=False):
     display_gs(gs)
     gs.proceed()
 
+def get_miscommunication_chances(round: int) -> bool:
+    return random.random() < round / 8 + 0.15
+
+def get_interception_chances(round: int) -> bool:
+    return random.random() < round / 8 + 0.15
+
 def test_scenario(gs: GameState):
     # game preparation
     gs.prepare()
-    teams = add_players(gs)
+    add_players(gs)
     gs.proceed()
 
-    game_loop(gs)
-    game_loop(gs, miscomunication=True)
-    game_loop(gs)
-    game_loop(gs, miscomunication=True)
+    while gs.is_ongoing():
+        round_number = gs.data.round_number // 2
+        game_loop(
+            gs,
+            get_miscommunication_chances(round_number),
+            get_interception_chances(round_number),
+        )
+        display_gs(gs)
+
     print("and the winner is", gs.data.winner)
     
